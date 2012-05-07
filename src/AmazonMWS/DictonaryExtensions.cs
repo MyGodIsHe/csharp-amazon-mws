@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 
-namespace Amazone.MWS
+namespace Amazon.MWS
 {
     public static class DictonaryExtensions
     {

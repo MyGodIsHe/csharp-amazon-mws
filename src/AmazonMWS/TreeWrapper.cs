@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using System.IO;
 
-namespace Amazone.MWS
+namespace Amazon.MWS
 {
     /// <summary>
     /// Small wrapper around the find and findall methods of

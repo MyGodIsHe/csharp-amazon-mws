@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazoneMWS", "AmazoneMWS\AmazoneMWS.csproj", "{968D7441-2919-418E-B20F-E834AC652CD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazonMWS", "AmazonMWS\AmazonMWS.csproj", "{968D7441-2919-418E-B20F-E834AC652CD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

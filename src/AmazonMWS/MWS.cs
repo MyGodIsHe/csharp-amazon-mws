@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace Amazone.MWS
+namespace Amazon.MWS
 {
     /// <summary>
     /// Base Amazon API class

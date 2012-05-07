@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 
-namespace Amazone.MWS
+namespace Amazon.MWS
 {
     /// <summary>
     /// Amazon MWS Feeds API

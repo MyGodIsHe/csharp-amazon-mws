@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Amazone.MWS
+namespace Amazon.MWS
 {
     /// <summary>
     /// Amazon MWS Reports API
