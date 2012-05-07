@@ -11,10 +11,10 @@ namespace Amazone.MWS
     /// Small wrapper around the find and findall methods of
     /// the the System.Xml.XmlDocument class.
     /// </summary>
-    class TreeWrapper
+    public class TreeWrapper
     {
-        private XmlDocument doc;
-        private string ns;
+        public XmlDocument doc;
+        public string ns;
 
         public TreeWrapper(Stream stream, string ns)
         {
