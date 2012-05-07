@@ -12,6 +12,10 @@ namespace Amazon.MWS
     {
         public override string ACCOUNT_TYPE { get { return "Merchant"; } }
 
+        public Reports(string accessKey, string secretKey, string accountId,
+            string domain = null, string uri = null, string version = null)
+            : base(accessKey, secretKey, accountId, domain, uri, version) { }
+
         public TreeWrapper RequestReport(string reportType, string startDate = null, string endDate = null,
             string[] marketplaceIds = null)
         {

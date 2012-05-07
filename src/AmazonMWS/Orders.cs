@@ -14,6 +14,10 @@ namespace Amazon.MWS
         public override string VERSION { get { return "2011-01-01"; } }
         public override string NS { get { return "{https://mws.amazonservices.com/Orders/2011-01-01}"; } }
 
+        public Orders(string accessKey, string secretKey, string accountId,
+            string domain = null, string uri = null, string version = null)
+            : base(accessKey, secretKey, accountId, domain, uri, version) { }
+
         public TreeWrapper ListOrders(string[] marketplaceIds, string createdAfter=null,
             string createdBefore=null, string lastUpdatedAfter=null,
             string lastUpdatedBefore=null, string[] orderStatus=null, string[] fulfillmentChannels=null,

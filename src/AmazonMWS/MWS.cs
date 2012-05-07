@@ -52,15 +52,14 @@ namespace Amazon.MWS
         private string version;
 
         public MWS(string accessKey, string secretKey, string accountId,
-                   string domain = "https://mws.amazonservices.com",
-                   string uri = null, string version = null)
+            string domain = null, string uri = null, string version = null)
         {
             this.accessKey = accessKey;
             this.secretKey = secretKey;
             this.accountId = accountId;
-            this.domain = domain;
-            this.uri = uri != null ? uri : URI;
-            this.version = version != null ? version : VERSION;
+            this.domain = domain ?? "https://mws.amazonservices.com";
+            this.uri = uri ?? URI;
+            this.version = version ?? VERSION;
         }
 
         /// <summary>

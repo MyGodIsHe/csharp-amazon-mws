@@ -13,6 +13,10 @@ namespace Amazon.MWS
     {
         public override string ACCOUNT_TYPE { get { return "Merchant"; } }
 
+        public Feeds(string accessKey, string secretKey, string accountId,
+            string domain = null, string uri = null, string version = null)
+            : base(accessKey, secretKey, accountId, domain, uri, version) { }
+
         /// <summary>
         /// Uploads a feed ( xml or .tsv ) to the seller's inventory.
         /// Can be used for creating/updating products on amazon.

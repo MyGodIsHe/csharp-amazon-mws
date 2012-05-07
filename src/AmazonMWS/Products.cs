@@ -14,6 +14,10 @@ namespace Amazon.MWS
         public override string VERSION { get { return "2011-10-01"; } }
         public override string NS { get { return "{http://mws.amazonservices.com/schema/Products/2011-10-01}"; } }
 
+        public Products(string accessKey, string secretKey, string accountId,
+            string domain = null, string uri = null, string version = null)
+            : base(accessKey, secretKey, accountId, domain, uri, version) { }
+
         /// <summary>
         /// Returns a list of products and their attributes, ordered by
         /// relevancy, based on a search query that you specify.
