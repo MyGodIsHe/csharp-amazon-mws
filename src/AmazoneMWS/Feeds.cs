@@ -9,9 +9,9 @@ namespace Amazone.MWS
     /// <summary>
     /// Amazon MWS Feeds API
     /// </summary>
-    class Feeds : MWS
+    public class Feeds : MWS
     {
-        public const string ACCOUNT_TYPE = "Merchant";
+        public override string ACCOUNT_TYPE { get { return "Merchant"; } }
 
         /// <summary>
         /// Uploads a feed ( xml or .tsv ) to the seller's inventory.
@@ -23,7 +23,7 @@ namespace Amazone.MWS
         /// <param name="content_type"></param>
         /// <param name="purge"></param>
         /// <returns></returns>
-        public TreeWrapper SubmitFeed(string feed, string feedType, string[] marketplaceIDs = null,
+        public TreeWrapper SubmitFeed(string feed, string feedType, string[] marketplaceIds = null,
             string content_type = "text/xml", string purge = "false")
         {
             var data = new Dictionary<string, string>() {
@@ -31,8 +31,8 @@ namespace Amazone.MWS
                 {"FeedType", feedType},
                 {"PurgeAndReplace", purge},
             };
-            if (marketplaceIDs != null)
-                data.Update(EnumerateParam("MarketplaceIdList.Id.", marketplaceIDs));
+            if (marketplaceIds != null)
+                data.Update(EnumerateParam("MarketplaceIdList.Id.", marketplaceIds));
             var md = CalcMD5(feed);
             var headers = new Dictionary<HttpRequestHeader, string>(){
                 {HttpRequestHeader.ContentMd5, md},
@@ -41,7 +41,7 @@ namespace Amazone.MWS
             return MakeRequest(data, WebRequestMethods.Http.Post, headers, feed);
         }
 
-        public TreeWrapper GetFeedSubmissionList(string[] feedIDs=null, int? maxCount=null,
+        public TreeWrapper GetFeedSubmissionList(string[] feedIds=null, int? maxCount=null,
             string[] feedTypes=null, string[] processingStatuses=null, string fromDate=null, string toDate=null)
         {
             var data = new Dictionary<string, string>() {
@@ -50,7 +50,7 @@ namespace Amazone.MWS
                 {"SubmittedFromDate", fromDate},
                 {"SubmittedToDate", toDate},
             };
-            data.Update(EnumerateParam("FeedSubmissionIdList.Id", feedIDs));
+            data.Update(EnumerateParam("FeedSubmissionIdList.Id", feedIds));
             data.Update(EnumerateParam("FeedTypeList.Type.", feedTypes));
             data.Update(EnumerateParam("FeedProcessingStatusList.Status.", processingStatuses));
             return MakeRequest(data);
@@ -78,7 +78,7 @@ namespace Amazone.MWS
             return MakeRequest(data);
         }
 
-        public TreeWrapper CancelFeedSubmissions(string[] feedIDs=null, string[] feedTypes=null,
+        public TreeWrapper CancelFeedSubmissions(string[] feedIds=null, string[] feedTypes=null,
             string fromDate=null, string toDate=null)
         {
             var data = new Dictionary<string, string>() {
@@ -86,16 +86,16 @@ namespace Amazone.MWS
                 {"SubmittedFromDate", fromDate},
                 {"SubmittedToDate", toDate}
             };
-            data.Update(EnumerateParam("FeedSubmissionIdList.Id.", feedIDs));
+            data.Update(EnumerateParam("FeedSubmissionIdList.Id.", feedIds));
             data.Update(EnumerateParam("FeedTypeList.Type.", feedTypes));
             return MakeRequest(data);
         }
 
-        public TreeWrapper GetFeedSubmissionResult(string feedID)
+        public TreeWrapper GetFeedSubmissionResult(string feedId)
         {
             var data = new Dictionary<string, string>() {
                 {"Action", "GetFeedSubmissionResult"},
-                {"FeedSubmissionId", feedID}
+                {"FeedSubmissionId", feedId}
             };
             return MakeRequest(data);
         }

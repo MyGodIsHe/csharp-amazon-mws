@@ -15,34 +15,34 @@ namespace Amazone.MWS
         /// <summary>
         /// This is used to post/get to the different uris used by amazon per api
         /// ie. /Orders/2011-01-01
-        /// All subclasses must define their own URI only if needed
+        /// All subclasses must public TreeWrapperine their own URI only if needed
         /// </summary>
-        public const string URI = "/";
+        public virtual string URI { get { return "/"; } }
 
         /// <summary>
         /// The API version varies in most amazon APIs
         /// </summary>
-        public const string VERSION = "2009-01-01";
+        public virtual string VERSION { get { return "2009-01-01"; } }
 
         /// <summary>
         /// There seem to be some xml namespace issues. therefore every api subclass
-        /// is recommended to define its namespace, so that it can be referenced
+        /// is recommended to public TreeWrapperine its namespace, so that it can be referenced
         /// like so AmazonAPISubclass.NS.
         /// For more information see http://stackoverflow.com/a/8719461/389453
         /// </summary>
-        public const string NS = "";
+        public virtual string NS { get { return ""; } }
 
         /// <summary>
         /// # Some APIs are available only to either a "Merchant" or "Seller"
         /// the type of account needs to be sent in every call to the amazon MWS.
-        /// This constant defines the exact name of the parameter Amazon expects
+        /// This constant public TreeWrapperines the exact name of the parameter Amazon expects
         /// for the specific API being used.
-        /// All subclasses need to define this if they require another account type
-        /// like "Merchant" in which case you define it like so.
+        /// All subclasses need to public TreeWrapperine this if they require another account type
+        /// like "Merchant" in which case you public TreeWrapperine it like so.
         /// ACCOUNT_TYPE = "Merchant"
         /// Which is the name of the parameter for that specific account type.
         /// </summary>
-        public const string ACCOUNT_TYPE = "SellerId";
+        public virtual string ACCOUNT_TYPE { get { return "SellerId"; } }
 
         private string accessKey;
         private string secretKey;
@@ -53,14 +53,14 @@ namespace Amazone.MWS
 
         public MWS(string accessKey, string secretKey, string accountId,
                    string domain = "https://mws.amazonservices.com",
-                   string uri = MWS.URI, string version = MWS.VERSION)
+                   string uri = null, string version = null)
         {
             this.accessKey = accessKey;
             this.secretKey = secretKey;
             this.accountId = accountId;
             this.domain = domain;
-            this.uri = uri;
-            this.version = version;
+            this.uri = uri != null ? uri : URI;
+            this.version = version != null ? version : VERSION;
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Amazone.MWS
         {
             var qParams = new Dictionary<string, string>(){
                 {"AWSAccessKeyId", this.accessKey},
-                {MWS.ACCOUNT_TYPE, this.accountId},
+                {ACCOUNT_TYPE, this.accountId},
                 {"SignatureVersion", "2"},
                 {"Timestamp", this.GetTimestamp()},
                 {"Version", this.version},
@@ -109,7 +109,7 @@ namespace Amazone.MWS
                 dataStream.Close();
             }
             var response = request.GetResponse();
-            var parsedResponse = new TreeWrapper(response.GetResponseStream(), MWS.NS);
+            var parsedResponse = new TreeWrapper(response.GetResponseStream(), NS);
             response.Close();
             return parsedResponse;
         }
