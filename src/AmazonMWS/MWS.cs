@@ -89,10 +89,10 @@ namespace Amazon.MWS
                 from param in qParams
                 select
                     Uri.EscapeDataString(
-                        string.Format("{1}={2}",
+                        string.Format("{0}={1}",
                             param.Key, param.Value)));
             var signature = this.CalcSignature(method, requestDescription);
-            var url = string.Format("{1}{2}?{3}&Signature={4}",
+            var url = string.Format("{0}{1}?{2}&Signature={3}",
                 this.domain, this.uri, requestDescription, Uri.EscapeDataString(signature));
             var request = HttpWebRequest.Create(url);
             request.Method = method.ToString();
@@ -180,7 +180,7 @@ namespace Amazon.MWS
             if (!param.EndsWith("."))
                 param = param + ".";
             for (int i = 0; i < values.Length; i++)
-                dict[string.Format("{1}{2}", param, i + 1)] = values[i];
+                dict[string.Format("{0}{1}", param, i + 1)] = values[i];
             return dict;
         }
     }
