@@ -96,7 +96,7 @@ namespace Amazon.MWS
                 this.domain, this.uri, requestDescription, Uri.EscapeDataString(signature));
             var request = HttpWebRequest.Create(url);
             request.Method = method.ToString();
-            request.Headers.Add(HttpRequestHeader.UserAgent, "csharp-amazon-mws/0.0.1 (Language=CSharp)");
+            request.Headers[HttpRequestHeader.UserAgent] = "csharp-amazon-mws/0.0.1 (Language=CSharp)";
             if (extraHeaders != null)
                 foreach (var x in extraHeaders)
                     request.Headers.Add(x.Key, x.Value);
