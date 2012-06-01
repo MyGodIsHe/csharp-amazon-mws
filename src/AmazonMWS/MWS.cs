@@ -82,7 +82,7 @@ namespace Amazon.MWS
                 {"Version", this.version},
                 {"SignatureMethod", "HmacSHA256"},
             };
-            qParams.Update(extraData.Where(i => string.IsNullOrEmpty(i.Value)) as Dictionary<string, string>);
+            qParams.Update(extraData.Where(i => !string.IsNullOrEmpty(i.Value)).ToDictionary(p => p.Key, p => p.Value));
 
             //TODO add encode('utf-8')
             var requestDescription = string.Join("&",
@@ -131,7 +131,7 @@ namespace Amazon.MWS
         /// <returns></returns>
         public string CalcSignature(string method, string requestDescription)
         {
-            var sigData = string.Format("{1}\n{2}\n{3}\n{4}",
+            var sigData = string.Join("\n",
                 method, this.domain.Replace("https://", "").ToLower(), this.uri, requestDescription);
             var sigDataAsBytes = ASCIIEncoding.ASCII.GetBytes(sigData);
             var hmac = new HMACSHA256(ASCIIEncoding.ASCII.GetBytes(this.secretKey));

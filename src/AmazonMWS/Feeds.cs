@@ -28,7 +28,7 @@ namespace Amazon.MWS
         /// <param name="purge"></param>
         /// <returns></returns>
         public TreeWrapper SubmitFeed(string feed, string feedType, string[] marketplaceIds = null,
-            string content_type = "text/xml", string purge = "false")
+            string contentType = "text/xml", string purge = "false")
         {
             var data = new Dictionary<string, string>() {
                 {"Action", "SubmitFeed"},
@@ -40,7 +40,7 @@ namespace Amazon.MWS
             var md = CalcMD5(feed);
             var headers = new Dictionary<HttpRequestHeader, string>(){
                 {HttpRequestHeader.ContentMd5, md},
-                {HttpRequestHeader.ContentType, content_type},
+                {HttpRequestHeader.ContentType, contentType},
             };
             return MakeRequest(data, WebRequestMethods.Http.Post, headers, feed);
         }
