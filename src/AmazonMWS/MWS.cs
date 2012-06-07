@@ -88,15 +88,14 @@ namespace Amazon.MWS
             var requestDescription = string.Join("&",
                 from param in qParams
                 select
-                    Uri.EscapeDataString(
-                        string.Format("{0}={1}",
-                            param.Key, param.Value)));
+                    string.Format("{0}={1}",
+                        param.Key, Uri.EscapeDataString(param.Value)));
             var signature = this.CalcSignature(method, requestDescription);
             var url = string.Format("{0}{1}?{2}&Signature={3}",
                 this.domain, this.uri, requestDescription, Uri.EscapeDataString(signature));
-            var request = HttpWebRequest.Create(url);
+            var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = method.ToString();
-            request.Headers[HttpRequestHeader.UserAgent] = "csharp-amazon-mws/0.0.1 (Language=CSharp)";
+            request.UserAgent = "csharp-amazon-mws/0.0.1 (Language=CSharp)";
             if (extraHeaders != null)
                 foreach (var x in extraHeaders)
                     request.Headers.Add(x.Key, x.Value);
